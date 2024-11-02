@@ -10,3 +10,5 @@ class Wish(BaseModel):
     description: str
     price: int
 
+
+wishRepo = [Wish(id = 1, wishName = "Карбонара", description = "Сливочные спагетти с хрустящим беконом под сыром моцарелла", price = 299)]
