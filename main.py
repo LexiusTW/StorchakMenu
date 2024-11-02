@@ -1,5 +1,5 @@
 from typing import Annotated
-from fastapi import FastAPI, Form
+from fastapi import FastAPI, Form, HTTPException
 from pydantic import BaseModel
 
 
@@ -23,3 +23,13 @@ def get_menu():
 def add_wish(wish: Annotated[Wish, Form()]):
     wishRepo.append(wish)
     return "Данные успешно добавлены =)"
+
+@app.put("/")
+def update_wish(wish: Annotated[Wish, Form()]):
+    for ws in wishRepo:
+        if ws.id == wish.id:
+            ws.wishName = wish.wishName
+            ws.description = wish.description
+            ws.price = wish.price
+        return "Данные успешно обновлены =)"
+    raise HTTPException(status_code=404, detail="wish not found")
