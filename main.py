@@ -1,4 +1,5 @@
-from fastapi import FastAPI
+from typing import Annotated
+from fastapi import FastAPI, Form
 from pydantic import BaseModel
 
 
@@ -17,3 +18,8 @@ wishRepo = [Wish(id = 1, wishName = "Карбонара", description = "Сли�
 @app.get("/")
 def get_menu():
     return wishRepo
+
+@app.post("/")
+def add_wish(wish: Annotated[Wish, Form()]):
+    wishRepo.append(wish)
+    return "Данные успешно добавлены =)"
