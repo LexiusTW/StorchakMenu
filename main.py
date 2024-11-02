@@ -12,3 +12,8 @@ class Wish(BaseModel):
 
 
 wishRepo = [Wish(id = 1, wishName = "Карбонара", description = "Сливочные спагетти с хрустящим беконом под сыром моцарелла", price = 299)]
+
+
+@app.get("/")
+def get_menu():
+    return wishRepo
