@@ -33,3 +33,11 @@ def update_wish(wish: Annotated[Wish, Form()]):
             ws.price = wish.price
         return "Данные успешно обновлены =)"
     raise HTTPException(status_code=404, detail="wish not found")
+
+@app.delete("/")
+def delete_wish(id: int):
+    for ws in wishRepo:
+        if id == ws.id:
+            wishRepo.remove(ws)
+        return "Блюдо успешно удалено =)"
+    raise HTTPException(status_code = 404, detail = "wish not found")
